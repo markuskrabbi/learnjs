@@ -1,41 +1,29 @@
-function hello(){
-    console.log('hello1');
-}
-let hello2 = function (){
-    console.log('hello2');
-}
+// console.log(window, {document});
+let title = document.getElementById('title');
+console.log({title});
 
-let hello3 = () => {
-    console.log('hello3');
-}
-
-let hello4 = () => console.log('hello4')
-
-hello();
-hello2();
-hello3();
-hello4();
-
-let person = {
-    name: 'Markus',
-    age: '18',
-    describe(){
-        console.log(this);
-        console.log('name:'+ this.name + ' age:' + this.age);
-    },
-    describe2: () => {
-        console.log(this);
-        console.log('name:'+ this.name + ' age:' + this.age);
-    },
-    describe3: function (){
-        console.log(this);
-        console.log('name:'+ this.name + ' age:' + this.age);
+setTimeout(() => {
+    title.innerText = 'Goodbye Js';
+    title.classList.add('green');
+    
+}, 5000);
+let r, g, b;
+setInterval(() => {
+    r = Math.round(Math.random() * 255);
+    g = Math.round(Math.random() * 255);
+    b = Math.round(Math.random() * 255);
+    document.body.style.background = `rgb(${r}, ${g}, ${b})`;
+    if(title.classList.contains('green')) {
+        title.classList.replace('green', 'red');
+    } else {
+        title.classList.replace('red', 'green');
     }
-}
 
-person.name = 'Krabbi';
-person.age = '99';
 
-person.describe();
-person.describe2();
-person.describe3();
+},1000);
+
+let textinput = document.querySelector('#textinput');
+textinput.addEventListener('input', evt => {
+    console.log(evt);
+    title.innerText = textinput.value.split('').reverse().join('');
+});
