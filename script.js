@@ -1,43 +1,35 @@
-//console.log(window, {document});
-// setTimeout(() => {
-//     document.location = 'https://google.com';
-// }, 5000);
-let canvas = document.querySelector('canvas');
-let ctx = canvas.getContext('2d');
+// console.log(window, {document});
+//     setTimeout(() => {
+//         document.location = 'https://google.com';
+//     }, 5000);
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+ctx.strokeStyle = "black";
+ctx.strokeRect(40,20,320,200);
+ctx.fillStyle = 'blue';
+ctx.fillRect(40,20,320,66.6);
+ctx.beginPath();
+ctx.strokeRect(40,20,320,200);
+ctx.fillStyle = 'black';
+ctx.fillRect(40,86,320,66.6);
+ctx.closePath();
 
-let x = 10;
-let y = 10;
-let pressed = false;
-let arcSize = 20;
+ctx.lineWidth = 10;
 
-let color = document.querySelector('#color');
-
-setInterval(() => {
-    if(pressed){
-        ctx.fillStyle = color.value;
-        ctx.beginPath();
-        ctx.arc(x, y, arcSize, 0, 2*Math.PI);
-        ctx.fill();
-    }
-},16);
-
-canvas.addEventListener('mousemove', event => {
-    console.log(event);
-    x = event.clientX - canvas.offsetLeft;
-    y = event.clientY - canvas.offsetTop;
-});
-canvas.addEventListener('mousedown', event => {
-    pressed = true;
-});
-canvas.addEventListener('mouseup', event => {
-    pressed = false;
-});
-let size = document.querySelector('#size');
-let sizeValue = document.querySelector('#sizeValue');
-sizeValue.innerHTML = size.value;
-arcSize = size.value;
-size.addEventListener('input', ()=> {
-    sizeValue.innerHTML = size.value;
-    arcSize = size.value;
-});
-
+// PENTAGRAM
+ctx.beginPath();
+var Base = {x:250, y:10};
+ctx.moveTo(Base.x, Base.y);
+var radius = 240;
+ctx.beginPath();
+ctx.strokeStyle = '#D60606';
+ctx.moveTo(Base.x, Base.y);
+for(var i=1;i<=5; ++i){
+  var th = i * 4 * Math.PI/5;
+  var x = Base.x + radius * Math.sin(th);
+  var y = Base.y + radius - radius * Math.cos(th);
+  ctx.lineTo(x,y);
+}
+ctx.lineJoin = 'miter';
+ctx.closePath();
+ctx.stroke();
