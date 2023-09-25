@@ -4,3 +4,6 @@
 .red {
     color: red;
 }
+canvas {
+    border: 1px black solid;
+}
